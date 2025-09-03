@@ -48,7 +48,9 @@ long	ft_atol(const char *str)
 	str = is_valid(str);
 	while (ft_isdigit(*str))
 		nb = (nb * 10) + (*str++ - 48);
+	if (*str != '\0')
+		print_error("error : Only numbers");
 	if (nb > INT_MAX)
-		printf("error : value too big");
+		print_error("error : value too big");
 	return (nb);
 }
