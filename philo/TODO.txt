@@ -1,0 +1,7 @@
+// 6 etapes
+// 1: initialiser tes mutex;
+// 2: initialiser tes philo;
+// 3: creer les thread (pthread_create + join)
+// 4: routines (eat, sleep, think)
+// 5: checker (thread)
+// 6: destroy all mutex

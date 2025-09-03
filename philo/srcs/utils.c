@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/03 11:39:55 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/03 11:40:32 by ainthana         ###   ########.fr       */
+/*   Created: 2025/09/03 16:17:02 by ainthana          #+#    #+#             */
+/*   Updated: 2025/09/03 17:28:22 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(int ac, char **av)
-{
-	(void)ac;
-	(void)av;
+#include "../inc/philo.h"
 
-	return 0;
+void	print_error(const char *msg)
+{
+	printf(RED"%s\n"RESET, msg);
+	exit(EXIT_FAILURE);
 }
