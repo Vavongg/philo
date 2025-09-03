@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 16:49:36 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/03 18:19:18 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/09/03 20:31:30 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	parse_input(t_table *table, char **av)
 	if (table->time_to_die < 6e4
 		|| table->time_to_eat < 6e4
 		|| table->time_to_sleep < 6e4)
-		print_error("timestamps major than 60ms");
+		print_error("timestamps >= 60ms");
 	if (table->nb_philos < 1 || table->nb_philos > 200)
 		print_error("wrong number of philo");
 	if (av[5])

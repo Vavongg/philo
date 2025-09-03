@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 14:46:13 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/03 17:34:59 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/09/03 20:41:36 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_table
 
 void	print_error(const char *msg);
 void	parse_input(t_table *table, char **av);
+long	ft_atol(const char *str);
 
 #endif
 
