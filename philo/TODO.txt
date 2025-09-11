@@ -5,3 +5,64 @@
 // 4: routines (eat, sleep, think)
 // 5: checker (thread)
 // 6: destroy all mutex
+
+
+------------------------------------------------------------------------------------------
+
+1. Initialisation
+
+Allouer et initialiser tab_forks (mutex pour chaque fourchette).
+
+Allouer et remplir philos :
+
+donner leur id
+
+mettre meal_eaten = 0
+
+relier left_fork et right_fork à tab_forks.
+
+Initialiser print_lock et state_lock.
+
+------------------------------------------------------------------------------------------
+
+🔹 2. Création des threads
+
+Boucler sur chaque philosophe et créer un pthread_create(&philo[i].thread, NULL, routine, &philo[i]).
+
+Routine = la vie du philosophe (eat → sleep → think).
+
+------------------------------------------------------------------------------------------
+
+🔹 3. Routine des philosophes
+
+take_forks : verrouiller les mutex gauche et droite (attention à l’ordre pour éviter deadlock).
+
+eat : afficher log + mettre à jour last_meal + incrémenter meal_eaten.
+
+release_forks : déverrouiller les deux mutex.
+
+sleep : afficher log + usleep.
+
+think : afficher log.
+
+-----------------------------------------------------------------------------------------
+
+🔹 4. Thread de monitoring
+
+Lancer un thread qui surveille :
+
+si un philosophe meurt (now - last_meal > time_to_die).
+
+si tous ont fini (full_meals == true pour tous).
+
+Si une condition est remplie → arrêter la simulation (simulation_active = false).
+
+-----------------------------------------------------------------------------------------
+
+🔹 5. Gestion de la fin
+
+pthread_join sur tous les philosophes.
+
+Détruire tous les mutex (pthread_mutex_destroy).
+
+Free la mémoire (philos, tab_forks).

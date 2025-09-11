@@ -13,7 +13,6 @@
 NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
-LIBFT = libft/libft.a
 
 SRC = \
 	srcs/main.c \
@@ -32,7 +31,7 @@ CYAN = \033[36m
 BLUE = \033[34m
 
 # ───── Rules ─────
-all: $(OBJ_DIR) $(LIBFT) $(NAME)
+all: $(OBJ_DIR) $(NAME)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)/srcs
@@ -42,10 +41,6 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $@
 	@echo "$(GREEN)✔ $(NAME) compilé avec succès.$(RESET)"
 
-$(LIBFT):
-	@echo "$(CYAN)➤ Compilation libft...$(RESET)"
-	@$(MAKE) --no-print-directory -C libft > /dev/null
-
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -Iinc -c $< -o $@
@@ -53,12 +48,10 @@ $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	@$(MAKE) --no-print-directory -C libft clean > /dev/null
 	@echo "$(RED)✘ Fichiers objets nettoyés.$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@$(MAKE) --no-print-directory -C libft fclean > /dev/null
 	@echo "$(RED)✘ Exécutable supprimé.$(RESET)"
 
 re: fclean all
