@@ -6,17 +6,11 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 16:17:02 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/11 13:06:53 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/09/12 11:11:54 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-
-void	print_error(const char *msg)
-{
-	printf(RED"%s\n"RESET, msg);
-	exit(EXIT_FAILURE);
-}
 
 int	ft_isdigit(int c)
 {

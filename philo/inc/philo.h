@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 14:46:13 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/11 12:48:11 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/09/12 12:39:32 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <pthread.h>   // mutex + threads
 # include <sys/time.h>  // gettimeofday
 # include <limits.h>    // INT_MAX
+# include <errno.h>
 
 // Couleurs ANSI pour printf
 
@@ -35,6 +36,23 @@
 # define WHITE       "\033[37m"
 
 typedef long long	t_msec; // millisecond timestamp
+
+//enum mutex && thread
+
+typedef enum e_mutex_action
+{
+	LOCK,
+	UNLOCK,
+	INIT,
+	DESTROY
+}	t_mutex_action;
+
+typedef enum e_thread_action
+{
+	CREATE,
+	JOIN,
+	DETACH
+}	t_thread_action;
 
 // Structures
 
@@ -65,12 +83,24 @@ typedef struct s_table
 	t_philo			*philos;
 }	t_table;
 
-// Srcs
+// err utils
 
 void	print_error(const char *msg);
+
+// Parsing
 void	parse_input(t_table *table, char **av);
+
+// functions utils
+
 int		ft_isdigit(int c);
 bool	ft_isspace(char c);
 long	ft_atol(const char *str);
+
+// Safe functions
+
+void	*safe_malloc(size_t bytes);
+void	safe_mutex_handle(pthread_mutex_t *mutex, t_mutex_action mutex_op);
+void	safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
+		void *data, t_thread_action thread_op);
 
 #endif

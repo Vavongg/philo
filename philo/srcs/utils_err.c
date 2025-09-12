@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   utils_err.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/03 19:43:34 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/12 13:30:29 by ainthana         ###   ########.fr       */
+/*   Created: 2025/09/12 12:24:07 by ainthana          #+#    #+#             */
+/*   Updated: 2025/09/12 12:24:25 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-void	data_init(t_table *table)
+void	print_error(const char *msg)
 {
-	int	i;
+	printf(RED"%s\n"RESET, msg);
+	exit(EXIT_FAILURE);
+}
 
-	i = -1;
-	table->simulation_active = false;
-	table->philos = safe_malloc(sizeof(t_philo) * table->nb_philos);
-	table->tab_forks = safe_malloc(sizeof(pthread_mutex_t) * table->nb_philos);
-	while (++i < table->nb_philos)
-		safe_mutex_handle(&table->tab_forks[i], INIT);
+void	*safe_malloc(size_t bytes)
+{
+	void	*ret;
+
+	ret = malloc(bytes);
+	if (ret == NULL)
+		print_error("Error with the malloc");
+	return (ret);
 }

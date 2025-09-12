@@ -6,7 +6,7 @@
 #    By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/03 16:33:10 by ainthana          #+#    #+#              #
-#    Updated: 2025/09/03 17:13:46 by ainthana         ###   ########.fr        #
+#    Updated: 2025/09/12 12:27:33 by ainthana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS = -Wall -Wextra -Werror -g3
 SRC = \
 	srcs/main.c \
 	srcs/parsing.c \
-	srcs/utils.c \
+	srcs/utils.c srcs/utils2.c srcs/utils_err.c \
 
 OBJ_DIR = obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
