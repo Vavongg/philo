@@ -12,6 +12,40 @@
 
 #include "../inc/philo.h"
 
+static void	launch_forks(t_philo *philo, pthread_mutex_t *forks, int pos)
+{
+	int	philo_nbr;
+
+	philo_nbr = philo->table->nb_philos;
+	if (philo->id % 2)
+	{
+		philo->right_fork = &forks[pos];
+		philo->left_fork = &forks[(pos + 1) % philo_nbr];
+	}
+	else
+	{
+		philo->right_fork = &forks[(pos + 1) % philo_nbr];
+		philo->left_fork = &forks[pos];
+	}
+}
+
+static void	philo_init(t_table *table)
+{
+	int		i;
+	t_philo	*philo;
+
+	i = -1;
+	while (++i < table->nb_philos)
+	{
+		philo = table->philos + i;
+		philo->id = i + 1;
+		philo->full_meals = false;
+		philo->meal_eaten = 0;
+		philo->table = table;
+		launch_forks(philo, table->tab_forks, i);
+	}
+}
+
 void	data_init(t_table *table)
 {
 	int	i;
@@ -22,4 +56,5 @@ void	data_init(t_table *table)
 	table->tab_forks = safe_malloc(sizeof(pthread_mutex_t) * table->nb_philos);
 	while (++i < table->nb_philos)
 		safe_mutex_handle(&table->tab_forks[i], INIT);
+	philo_init(table);
 }

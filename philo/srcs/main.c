@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 	else
 	{
 		parse_input(&table, av);
-		//data_init(&table);
+		data_init(&table);
 		//start_simulation(&table);
 		//clean_all(&table); //philo full | 1 philo die
 	}
