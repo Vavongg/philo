@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_err.c                                        :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ainthana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/12 12:24:07 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/12 12:24:25 by ainthana         ###   ########.fr       */
+/*   Created: 2025/09/18 19:55:13 by tmalkawi          #+#    #+#             */
+/*   Updated: 2025/09/18 19:55:13 by tmalkawi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-void	print_error(const char *msg)
+void	*routine(void *data)
 {
-	printf(RED"%s\n"RESET, msg);
-	return ;
-}
+	t_philo	*philo;
 
-void	*safe_malloc(size_t bytes)
-{
-	void	*ret;
-
-	ret = malloc(bytes);
-	if (!ret)
+	philo = data;
+	while()
 	{
-		print_error("Error with the malloc");
-		return (NULL);
+
 	}
-	return (ret);
+	return (NULL);
 }

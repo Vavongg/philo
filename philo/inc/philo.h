@@ -88,7 +88,7 @@ typedef struct s_table
 void	print_error(const char *msg);
 
 // Parsing
-void	parse_input(t_table *table, char **av);
+int		parse_input(t_table *table, char **av);
 
 // functions utils
 
@@ -99,10 +99,15 @@ long	ft_atol(const char *str);
 // Safe functions
 
 void	*safe_malloc(size_t bytes);
-void	safe_mutex_handle(pthread_mutex_t *mutex, t_mutex_action mutex_op);
-void	safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
+int		mutex_action(pthread_mutex_t *mutex, t_mutex_action mutex_op);
+int		thread_action(pthread_t *thread, void *(*foo)(void *),
 			void *data, t_thread_action thread_op);
 
 // data init
-void	data_init(t_table *table);
+int		data_init(t_table *table);
+
+// simulation
+
+void	solo_philo(t_table *table);
+int		simulation_start(t_table *table);
 #endif

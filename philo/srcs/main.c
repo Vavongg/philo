@@ -18,14 +18,21 @@ int	main(int ac, char **av)
 
 	(void)av;
 	if (ac != 5 && ac != 6)
+	{
 		print_error("Invalid number of arguments.\n"
 			GREEN"Usage: ./philo nb_philos time_to_die"
-			"time_to_eat time_to_sleep [nb_meals]");
+			" time_to_eat time_to_sleep [nb_meals]");
+		return (1);
+	}
 	else
 	{
-		parse_input(&table, av);
-		data_init(&table);
-		//start_simulation(&table);
+		if (parse_input(&table, av))
+			return (1);
+		if (data_init(&table))
+			return (1);
+		//if(simulation(&table))
+		//	return (1)
 		//clean_all(&table); //philo full | 1 philo die
 	}
+	return (0);
 }

@@ -46,7 +46,7 @@ static void	philo_init(t_table *table)
 	}
 }
 
-void	data_init(t_table *table)
+int	data_init(t_table *table)
 {
 	int	i;
 
@@ -54,7 +54,10 @@ void	data_init(t_table *table)
 	table->simulation_active = false;
 	table->philos = safe_malloc(sizeof(t_philo) * table->nb_philos);
 	table->tab_forks = safe_malloc(sizeof(pthread_mutex_t) * table->nb_philos);
+	if (table->tab_forks == NULL || table->philos == NULL)
+		return (1);
 	while (++i < table->nb_philos)
-		safe_mutex_handle(&table->tab_forks[i], INIT);
+		mutex_action(&table->tab_forks[i], INIT);
 	philo_init(table);
+	return (0);
 }

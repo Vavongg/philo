@@ -12,7 +12,7 @@
 
 #include "../inc/philo.h"
 
-void	parse_input(t_table *table, char **av)
+int	parse_input(t_table *table, char **av)
 {
 	table->nb_philos = ft_atol(av[1]);
 	table->time_to_die = ft_atol(av[2]) * 1e3;
@@ -21,11 +21,22 @@ void	parse_input(t_table *table, char **av)
 	if (table->time_to_die < 6e4
 		|| table->time_to_eat < 6e4
 		|| table->time_to_sleep < 6e4)
-		print_error("timestamps >= 60ms");
+	{
+		print_error("timestamps <= 60ms");
+		return (1);
+	}
 	if (table->nb_philos < 1 || table->nb_philos > 200)
+	{
 		print_error("wrong number of philo");
+		return (1);
+	}
 	if (av[5])
+	{
 		table->meals_required = ft_atol(av[5]);
+		if (table->meals_required < 1)
+			return (print_error("meals_required must be positive"), 1);
+	}
 	else
 		table->meals_required = -1;
+	return (0);
 }

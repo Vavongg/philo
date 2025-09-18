@@ -25,10 +25,9 @@ bool	ft_isspace(char c)
 	return ((c >= 9 && c <= 13) || c == 32);
 }
 
-static const char	*is_valid(const char *str)
+static int	is_not_valid(const char *str)
 {
-	int			len;
-	const char	*nb;
+	int				len;
 
 	len = 0;
 	while (ft_isspace(*str))
@@ -36,15 +35,23 @@ static const char	*is_valid(const char *str)
 	if (*str == '+')
 		++str;
 	else if (*str == '-')
+	{
 		print_error("error : only positive value");
+		return (-1);
+	}
 	if (!ft_isdigit(*str))
+	{
 		print_error("error : wrong input");
-	nb = str;
+		return (-1);
+	}
 	while (ft_isdigit(*str++))
 		++len;
 	if (len > 10)
+	{
 		print_error("error : value too big");
-	return (nb);
+		return (-1);
+	}
+	return (0);
 }
 
 long	ft_atol(const char *str)
@@ -52,11 +59,15 @@ long	ft_atol(const char *str)
 	long	nb;
 
 	nb = 0;
-	str = is_valid(str);
+	if (is_not_valid(str))
+		return (0);
 	while (ft_isdigit(*str))
 		nb = (nb * 10) + (*str++ - 48);
 	if (*str != '\0')
+	{
 		print_error("error : wrong input");
+		return (0);
+	}
 	if (nb > INT_MAX)
 		print_error("error : value too big");
 	return (nb);
