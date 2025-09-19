@@ -53,6 +53,15 @@ typedef enum e_thread_action
 	DETACH
 }	t_thread_action;
 
+typedef enum e_routine_action
+{
+	FORK,
+	EAT,
+	SLEEP,
+	THINK,
+	DIE
+}	t_routine_action;
+
 // Structures
 
 typedef struct s_philo
@@ -102,12 +111,16 @@ int		mutex_action(pthread_mutex_t *mutex, t_mutex_action mutex_op);
 int		thread_action(pthread_t *thread, void *(*foo)(void *),
 			void *data, t_thread_action thread_op);
 
-// data init
+t_msec	actual_time(t_msec start_time);
+
+	// data init
 int		data_init(t_table *table);
 
 // simulation
 
 void	solo_philo(t_table *table);
 int		simulation_start(t_table *table);
+void	*routine(void *data);
+void	print_action(t_routine_action op, t_philo *philo);
 
 #endif

@@ -58,3 +58,11 @@ int	thread_action(pthread_t *thread, void *(*foo)(void *),
 	}
 	return (0);
 }
+
+t_msec	actual_time(t_msec start_time)
+{
+	struct timeval	now;
+
+	gettimeofday(&now, NULL);
+	return ((now.tv_sec * 1000 + now.tv_usec / 1000) - start_time);
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ainthana <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ainthana <ainthana@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/18 18:07:43 by tmalkawi          #+#    #+#             */
-/*   Updated: 2025/09/18 18:07:43 by tmalkawi         ###   ########.fr       */
+/*   Created: 2025/09/19 14:49:30 by ainthana          #+#    #+#             */
+/*   Updated: 2025/09/19 14:49:30 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	solo_philo(t_table *table)
 {
-	printf("0 1 has taken a fork");
+	printf("0 1 has taken a fork\n");
 	usleep(table->time_to_die);
 	printf("%d 1 died", table->time_to_die);
 }
@@ -37,7 +37,7 @@ int	simulation_start(t_table *table)
 		i = -1;
 		while (++i < table->nb_philos)
 		{
-			if (thread_action(&table->philos[i].thread, routine,
+			if (thread_action(&table->philos[i].thread, NULL,
 					&table->philos[i], JOIN))
 				return (1);
 		}

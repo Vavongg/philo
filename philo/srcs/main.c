@@ -30,8 +30,8 @@ int	main(int ac, char **av)
 			return (1);
 		if (data_init(&table))
 			return (1);
-		//if(simulation(&table))
-		//	return (1)
+		if (simulation_start(&table))
+			return (1);
 		//clean_all(&table); //philo full | 1 philo die
 	}
 	return (0);

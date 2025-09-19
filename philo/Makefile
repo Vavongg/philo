@@ -18,6 +18,7 @@ SRC = \
 	srcs/main.c \
 	srcs/parsing.c srcs/init.c \
 	srcs/utils.c srcs/sync_utils.c srcs/utils_err.c \
+	srcs/simulation.c srcs/routine.c \
 
 OBJ_DIR = obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
