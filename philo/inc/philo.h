@@ -20,7 +20,6 @@
 # include <pthread.h>   // mutex + threads
 # include <sys/time.h>  // gettimeofday
 # include <limits.h>    // INT_MAX
-# include <errno.h>
 
 // Couleurs ANSI pour printf
 

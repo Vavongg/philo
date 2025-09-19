@@ -12,20 +12,26 @@
 
 #include "../inc/philo.h"
 
-int	mutex_action(pthread_mutex_t *mutex,
-			t_mutex_action mutex_op)
+int	mutex_action(pthread_mutex_t *mutex, t_mutex_action mutex_op)
 {
+	int	status;
+
 	if (mutex_op == LOCK)
-		pthread_mutex_lock(mutex);
+		status = pthread_mutex_lock(mutex);
 	else if (mutex_op == UNLOCK)
-		pthread_mutex_unlock(mutex);
+		status = pthread_mutex_unlock(mutex);
 	else if (mutex_op == INIT)
-		pthread_mutex_init(mutex, NULL);
+		status = pthread_mutex_init(mutex, NULL);
 	else if (mutex_op == DESTROY)
-		pthread_mutex_destroy(mutex);
+		status = pthread_mutex_destroy(mutex);
 	else
 	{
 		print_error("Wrong input for mutex operation");
+		return (1);
+	}
+	if (status != 0)
+	{
+		print_error("Mutex operation failed");
 		return (1);
 	}
 	return (0);
@@ -34,14 +40,20 @@ int	mutex_action(pthread_mutex_t *mutex,
 int	thread_action(pthread_t *thread, void *(*foo)(void *),
 		void *data, t_thread_action thread_op)
 {
+	int	status;
+
 	if (thread_op == CREATE)
-		pthread_create(thread, NULL, foo, data);
+		status = pthread_create(thread, NULL, foo, data);
 	else if (thread_op == JOIN)
-		pthread_join(*thread, NULL);
+		status = pthread_join(*thread, NULL);
 	else
 	{
-		print_error("Wrong input for thread_handle :"
-			" use <CREATE> <JOIN>");
+		print_error("Wrong input for thread_handle: use <CREATE> <JOIN>");
+		return (1);
+	}
+	if (status != 0)
+	{
+		print_error("Thread operation failed");
 		return (1);
 	}
 	return (0);
