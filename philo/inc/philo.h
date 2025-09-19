@@ -96,7 +96,7 @@ int		ft_isdigit(int c);
 bool	ft_isspace(char c);
 long	ft_atol(const char *str);
 
-// Safe functions
+// functions utils
 
 void	*safe_malloc(size_t bytes);
 int		mutex_action(pthread_mutex_t *mutex, t_mutex_action mutex_op);
@@ -110,4 +110,5 @@ int		data_init(t_table *table);
 
 void	solo_philo(t_table *table);
 int		simulation_start(t_table *table);
+
 #endif

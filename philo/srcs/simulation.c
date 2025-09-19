@@ -15,7 +15,7 @@
 void	solo_philo(t_table *table)
 {
 	printf("0 1 has taken a fork");
-	usleep(table->time_to_die * 1000);
+	usleep(table->time_to_die);
 	printf("%d 1 died", table->time_to_die);
 }
 
@@ -30,14 +30,14 @@ int	simulation_start(t_table *table)
 	{
 		while (++i < table->nb_philos)
 		{
-			if (thread_action(&table->philos[i].thread, routine(),
+			if (thread_action(&table->philos[i].thread, routine,
 					&table->philos[i], CREATE))
 				return (1);
 		}
 		i = -1;
 		while (++i < table->nb_philos)
 		{
-			if (thread_action(&table->philo[i].thread, routine(),
+			if (thread_action(&table->philos[i].thread, routine,
 					&table->philos[i], JOIN))
 				return (1);
 		}
