@@ -17,7 +17,7 @@ CFLAGS = -Wall -Wextra -Werror -g3
 SRC = \
 	srcs/main.c \
 	srcs/parsing.c srcs/init.c \
-	srcs/utils.c srcs/utils2.c srcs/utils_err.c \
+	srcs/utils.c srcs/sync_utils.c srcs/utils_err.c \
 
 OBJ_DIR = obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
