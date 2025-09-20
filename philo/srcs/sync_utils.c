@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   sync_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 11:07:07 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/12 12:26:07 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/09/20 13:19:29 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,3 +66,17 @@ t_msec	actual_time(t_msec start_time)
 	gettimeofday(&now, NULL);
 	return ((now.tv_sec * 1000 + now.tv_usec / 1000) - start_time);
 }
+
+// void	ft_usleep(t_msec time_in_us, t_table *table)
+// {
+// 	t_msec current_time;
+
+// 	current_time = actual_time(table->start_time);
+// 	while (actual_time(table->start_time) - current_time < time_in_us / 1000)
+// 	{
+// 		usleep(100);
+// 		if (is_simulation_active(table))
+// 			return ;
+// 	}
+		
+// }

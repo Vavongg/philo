@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 14:46:13 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/12 12:39:32 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/09/20 13:24:47 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void	*safe_malloc(size_t bytes);
 int		mutex_action(pthread_mutex_t *mutex, t_mutex_action mutex_op);
 int		thread_action(pthread_t *thread, void *(*foo)(void *),
 			void *data, t_thread_action thread_op);
+void	ft_usleep(t_msec time_in_ms, t_table *table);
 
 t_msec	actual_time(t_msec start_time);
 
@@ -122,5 +123,16 @@ void	solo_philo(t_table *table);
 int		simulation_start(t_table *table);
 void	*routine(void *data);
 void	print_action(t_routine_action op, t_philo *philo);
+void	print_die(t_routine_action op, t_philo	*philo);
+
+// monitoring
+bool	is_simulation_active(t_table *table);
+void	stop_simulation(t_table *table);
+void	*monitor_meals(void *arg);
+void	*monitor_die(void *arg);
+bool	check_all_full(t_table *table);
+
+// clean
+void	clean_all(t_table *table);
 
 #endif

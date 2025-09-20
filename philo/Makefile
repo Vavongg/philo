@@ -6,7 +6,7 @@
 #    By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/03 16:33:10 by ainthana          #+#    #+#              #
-#    Updated: 2025/09/12 12:27:33 by ainthana         ###   ########.fr        #
+#    Updated: 2025/09/20 13:24:28 by ainthana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC = \
 	srcs/main.c \
 	srcs/parsing.c srcs/init.c \
 	srcs/utils.c srcs/sync_utils.c srcs/utils_err.c \
-	srcs/simulation.c srcs/routine.c \
+	srcs/simulation.c srcs/routine.c srcs/monitoring.c srcs/clean.c\
 
 OBJ_DIR = obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)

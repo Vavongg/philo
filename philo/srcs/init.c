@@ -6,12 +6,11 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 19:43:34 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/19 17:10:38 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/09/20 13:54:17 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-#include <stdbool.h>
 
 static void	launch_forks(t_philo *philo, pthread_mutex_t *forks, int pos)
 {
@@ -61,6 +60,7 @@ int	data_init(t_table *table)
 	while (++i < table->nb_philos)
 		mutex_action(&table->tab_forks[i], INIT);
 	mutex_action(&table->print_lock, INIT);
+	mutex_action(&table->state_lock, INIT);
 	philo_init(table);
 	gettimeofday(&tmp, NULL);
 	table->start_time = tmp.tv_sec * 1000 + tmp.tv_usec / 1000;
