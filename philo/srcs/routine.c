@@ -6,11 +6,29 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 14:49:15 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/20 13:31:38 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:31:10 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+void	think(t_philo *philo)
+{
+	long long	time_to_think;
+
+	if (is_simulation_active(philo->table) == false)
+		return ;
+	print_action(THINK, philo);
+	if (philo->table->nb_philos % 2 == 1)
+		time_to_think = (philo->table->time_to_eat * 2
+				- philo->table->time_to_sleep);
+	else
+		time_to_think = philo->table->time_to_eat
+			- philo->table->time_to_sleep;
+	if (time_to_think < 0)
+		time_to_think = 1;
+	usleep(time_to_think);
+}
 
 void	print_action(t_routine_action op, t_philo *philo)
 {
@@ -75,8 +93,7 @@ void	*routine(void *data)
 		mutex_action(philo->left_fork, UNLOCK);
 		print_action(SLEEP, philo);
 		usleep(philo->table->time_to_sleep);
-		print_action(THINK, philo);
-		usleep(100);
+		think(philo);
 	}
 	return (NULL);
 }

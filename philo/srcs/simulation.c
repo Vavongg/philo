@@ -19,71 +19,70 @@ void	solo_philo(t_table *table)
 	printf("%lld 1 died\n", actual_time(table->start_time));
 }
 
-static int create_philos_and_monitors(t_table *table,
-            pthread_t *monitor_die_thread,
-            pthread_t *monitor_meals_thread)
+static int	create_philos_and_monitors(t_table *table,
+			pthread_t *monitor_die_thread,
+			pthread_t *monitor_meals_thread)
 {
-    int i;
-	
-    i = -1;
-    while (++i < table->nb_philos)
-    {
-        if (thread_action(&table->philos[i].thread, routine,
-                &table->philos[i], CREATE))
-            return (1);
+	int	i;
+
+	i = -1;
+	while (++i < table->nb_philos)
+	{
+		if (thread_action(&table->philos[i].thread, routine,
+				&table->philos[i], CREATE))
+			return (1);
 		mutex_action(&table->state_lock, LOCK);
 		table->philos[i].last_meal = actual_time(table->start_time);
 		mutex_action(&table->state_lock, UNLOCK);
-    }
-    if (thread_action(monitor_die_thread, monitor_die, table, CREATE))
-        return (1);
-    if (table->meals_required > 0)
-    {
-        if (thread_action(monitor_meals_thread, monitor_meals, table, CREATE))
-            return (1);
-    }
-    return (0);
+	}
+	if (thread_action(monitor_die_thread, monitor_die, table, CREATE))
+		return (1);
+	if (table->meals_required > 0)
+	{
+		if (thread_action(monitor_meals_thread, monitor_meals, table, CREATE))
+			return (1);
+	}
+	return (0);
 }
 
-
-static int join_philos_and_monitors(t_table *table,
-            pthread_t monitor_die_thread,
-            pthread_t monitor_meals_thread)
+static int	join_philos_and_monitors(t_table *table,
+			pthread_t monitor_die_thread,
+			pthread_t monitor_meals_thread)
 {
-    int i;
+	int	i;
 
-    i = -1;
-    while (++i < table->nb_philos)
-    {
-        if (thread_action(&table->philos[i].thread, NULL,
-                &table->philos[i], JOIN))
-            return (1);
-    }
-    if (thread_action(&monitor_die_thread, NULL, table, JOIN))
-        return (1);
-    if (table->meals_required > 0)
-    {
-        if (thread_action(&monitor_meals_thread, NULL, table, JOIN))
-            return (1);
-    }
-    return (0);
+	i = -1;
+	while (++i < table->nb_philos)
+	{
+		if (thread_action(&table->philos[i].thread, NULL,
+				&table->philos[i], JOIN))
+			return (1);
+	}
+	if (thread_action(&monitor_die_thread, NULL, table, JOIN))
+		return (1);
+	if (table->meals_required > 0)
+	{
+		if (thread_action(&monitor_meals_thread, NULL, table, JOIN))
+			return (1);
+	}
+	return (0);
 }
 
-int simulation_start(t_table *table)
+int	simulation_start(t_table *table)
 {
-    pthread_t monitor_die_thread;
-    pthread_t monitor_meals_thread;
+	pthread_t	monitor_die_thread;
+	pthread_t	monitor_meals_thread;
 
-    if (table->nb_philos == 1)
-    {
-        solo_philo(table);
-        return (0);
-    }
-    if (create_philos_and_monitors(table, &monitor_die_thread, &monitor_meals_thread))
-        return (1);
-    if (join_philos_and_monitors(table, monitor_die_thread, monitor_meals_thread))
-        return (1);
-    return (0);
+	if (table->nb_philos == 1)
+	{
+		solo_philo(table);
+		return (0);
+	}
+	if (create_philos_and_monitors(table, &monitor_die_thread,
+			&monitor_meals_thread))
+		return (1);
+	if (join_philos_and_monitors(table, monitor_die_thread,
+			monitor_meals_thread))
+		return (1);
+	return (0);
 }
-
-

@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 14:46:13 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/20 13:24:47 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:15:31 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int		simulation_start(t_table *table);
 void	*routine(void *data);
 void	print_action(t_routine_action op, t_philo *philo);
 void	print_die(t_routine_action op, t_philo	*philo);
+void	think(t_philo *philo);
 
 // monitoring
 bool	is_simulation_active(t_table *table);

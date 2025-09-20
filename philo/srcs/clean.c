@@ -22,7 +22,7 @@ void	clean_all(t_table *table)
 		mutex_action(&table->tab_forks[i], DESTROY);
 		i++;
 	}
-    i = 0;
+	i = 0;
 	mutex_action(&table->print_lock, DESTROY);
 	mutex_action(&table->state_lock, DESTROY);
 	free(table->tab_forks);
