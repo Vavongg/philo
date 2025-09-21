@@ -73,3 +73,13 @@ void	stop_simulation(t_table *table)
 	table->simulation_active = false;
 	mutex_action(&table->state_lock, UNLOCK);
 }
+
+void	ft_usleep(t_msec time_in_ms, t_table *table)
+{
+	t_msec	start;
+
+	start = actual_time(table->start_time);
+	while (is_simulation_active(table)
+		&& actual_time(table->start_time) - start < time_in_ms)
+		usleep(100);
+}

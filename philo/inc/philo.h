@@ -79,9 +79,9 @@ typedef struct s_philo
 typedef struct s_table
 {
 	int				nb_philos;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
+	t_msec			time_to_die;
+	t_msec			time_to_eat;
+	t_msec			time_to_sleep;
 	int				meals_required;
 	t_msec			start_time;
 	bool			simulation_active;

@@ -31,9 +31,11 @@ static int	create_philos_and_monitors(t_table *table,
 		if (thread_action(&table->philos[i].thread, routine,
 				&table->philos[i], CREATE))
 			return (1);
-		mutex_action(&table->state_lock, LOCK);
+		if (mutex_action(&table->state_lock, LOCK))
+			return (1);
 		table->philos[i].last_meal = actual_time(table->start_time);
-		mutex_action(&table->state_lock, UNLOCK);
+		if (mutex_action(&table->state_lock, UNLOCK))
+			return (1);
 	}
 	if (thread_action(monitor_die_thread, monitor_die, table, CREATE))
 		return (1);
