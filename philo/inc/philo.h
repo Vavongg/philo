@@ -34,7 +34,7 @@
 # define CYAN        "\033[36m"
 # define WHITE       "\033[37m"
 
-typedef long long	t_msec; // millisecond timestamp
+typedef long long	t_msec;
 
 //enum mutex && thread
 
@@ -96,9 +96,10 @@ typedef struct s_table
 void	print_error(const char *msg);
 
 // Parsing
+
 int		parse_input(t_table *table, char **av);
 
-// functions utils
+// Parsing utils
 
 int		ft_isdigit(int c);
 bool	ft_isspace(char c);
@@ -114,7 +115,8 @@ void	ft_usleep(t_msec time_in_ms, t_table *table);
 
 t_msec	actual_time(t_msec start_time);
 
-	// data init
+// data init
+
 int		data_init(t_table *table);
 
 // simulation
@@ -127,6 +129,7 @@ void	print_die(t_routine_action op, t_philo	*philo);
 void	think(t_philo *philo);
 
 // monitoring
+
 bool	is_simulation_active(t_table *table);
 void	stop_simulation(t_table *table);
 void	*monitor_meals(void *arg);
@@ -134,6 +137,7 @@ void	*monitor_die(void *arg);
 bool	check_all_full(t_table *table);
 
 // clean
+
 void	clean_all(t_table *table);
 
 #endif
