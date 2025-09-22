@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 11:07:07 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/20 16:03:59 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:43:02 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,5 @@ void	ft_usleep(t_msec time_in_ms, t_table *table)
 	start = actual_time(table->start_time);
 	while (is_simulation_active(table)
 		&& actual_time(table->start_time) - start < time_in_ms)
-		usleep(100);
+		usleep(10);
 }

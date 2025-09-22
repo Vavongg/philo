@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 14:49:15 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/21 14:11:52 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:38:46 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	think(t_philo *philo)
 			- philo->table->time_to_sleep;
 	if (time_to_think < 0)
 		time_to_think = 1;
-	usleep(time_to_think); //todo: ft_usleep pdt routine
+	usleep(time_to_think);
 }
 
 void	print_action(t_routine_action op, t_philo *philo)
@@ -88,11 +88,11 @@ void	*routine(void *data)
 		if (philo->meal_eaten == philo->table->meals_required)
 			philo->full_meals = true;
 		mutex_action(&philo->table->state_lock, UNLOCK);
-		usleep(philo->table->time_to_eat);
+		ft_usleep(philo->table->time_to_eat, philo->table);
 		mutex_action(philo->right_fork, UNLOCK);
 		mutex_action(philo->left_fork, UNLOCK);
 		print_action(SLEEP, philo);
-		usleep(philo->table->time_to_sleep);
+		ft_usleep(philo->table->time_to_sleep, philo->table);
 		think(philo);
 	}
 	return (NULL);

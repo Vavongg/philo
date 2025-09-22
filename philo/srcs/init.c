@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 19:43:34 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/20 13:54:17 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:42:10 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,17 @@ int	data_init(t_table *table)
 	if (table->tab_forks == NULL || table->philos == NULL)
 		return (1);
 	while (++i < table->nb_philos)
-		mutex_action(&table->tab_forks[i], INIT);
+	{
+		if (mutex_action(&table->tab_forks[i], INIT))
+			return (1);
+	}
 	if (mutex_action(&table->print_lock, INIT))
 		return (1);
 	if (mutex_action(&table->state_lock, INIT))
 		return (1);
 	philo_init(table);
-	gettimeofday(&tmp, NULL);
+	if (gettimeofday(&tmp, NULL))
+		return (1);
 	table->start_time = tmp.tv_sec * 1000 + tmp.tv_usec / 1000;
 	return (0);
 }

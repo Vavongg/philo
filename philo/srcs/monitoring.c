@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 17:17:15 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/21 14:09:21 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:37:39 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,25 @@ static bool	check_philos_life(t_table *table)
 	t_msec	time_last_meal;
 
 	i = 0;
+	mutex_action(&table->state_lock, LOCK);
 	while (i < table->nb_philos)
 	{
-		mutex_action(&table->state_lock, LOCK);
 		time_last_meal = actual_time(table->start_time)
 			- table->philos[i].last_meal;
-		mutex_action(&table->state_lock, UNLOCK);
-		if (is_simulation_active(table)
-			&& time_last_meal > table->time_to_die / 1000) //todo: enlever le / 1000
-														   //ft_usleep()
+		if (table->simulation_active
+			&& time_last_meal > table->time_to_die)
 		{
-			print_die(DIE, &table->philos[i]);
-			stop_simulation(table);
+			mutex_action(&table->print_lock, LOCK);
+			printf("%lld %d died\n",
+				actual_time(table->start_time), table->philos[i].id);
+			mutex_action(&table->print_lock, UNLOCK);
+			table->simulation_active = false;
+			mutex_action(&table->state_lock, UNLOCK);
 			return (true);
 		}
 		i++;
 	}
+	mutex_action(&table->state_lock, UNLOCK);
 	return (false);
 }
 

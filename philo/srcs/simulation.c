@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 14:49:30 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/20 13:57:04 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:40:09 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	solo_philo(t_table *table)
 {
 	printf("0 1 has taken a fork\n");
-	usleep(table->time_to_die);
+	usleep(table->time_to_die * 1e3);
 	printf("%lld 1 died\n", actual_time(table->start_time));
 }
 
