@@ -64,7 +64,7 @@ void	print_die(t_routine_action op, t_philo	*philo)
 	mutex_action(&philo->table->print_lock, LOCK);
 	if (op == DIE)
 	{
-		printf("%lld %d is died\n",
+		printf("%lld %d died\n",
 			actual_time(philo->table->start_time), philo->id);
 	}
 	mutex_action(&philo->table->print_lock, UNLOCK);
