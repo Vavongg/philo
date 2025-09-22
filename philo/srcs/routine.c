@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 14:49:15 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/22 14:38:46 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/09/22 22:08:35 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,25 @@ void	think(t_philo *philo)
 
 void	print_action(t_routine_action op, t_philo *philo)
 {
-	if (is_simulation_active(philo->table))
+	mutex_action(&philo->table->state_lock, LOCK);
+	if (philo->table->simulation_active)
 	{
 		mutex_action(&philo->table->print_lock, LOCK);
 		if (op == FORK)
-		{
 			printf("%lld %d has taken a fork\n",
 				actual_time(philo->table->start_time), philo->id);
-		}
 		else if (op == EAT)
-		{
 			printf("%lld %d is eating\n",
 				actual_time(philo->table->start_time), philo->id);
-		}
 		else if (op == SLEEP)
-		{
 			printf("%lld %d is sleeping\n",
 				actual_time(philo->table->start_time), philo->id);
-		}
 		else if (op == THINK)
-		{
 			printf("%lld %d is thinking\n",
 				actual_time(philo->table->start_time), philo->id);
-		}
 		mutex_action(&philo->table->print_lock, UNLOCK);
 	}
+	mutex_action(&philo->table->state_lock, UNLOCK);
 }
 
 void	print_die(t_routine_action op, t_philo	*philo)
