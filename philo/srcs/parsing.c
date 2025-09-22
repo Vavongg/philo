@@ -6,47 +6,18 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 16:49:36 by ainthana          #+#    #+#             */
-/*   Updated: 2025/09/22 14:48:57 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/09/22 22:17:18 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-
-/*int	parse_input(t_table *table, char **av)
-{
-	table->nb_philos = ft_atol(av[1]);
-	table->time_to_die = ft_atol(av[2]) * 1e3;
-	table->time_to_eat = ft_atol(av[3]) * 1e3;
-	table->time_to_sleep = ft_atol(av[4]) * 1e3;
-	if (table->time_to_die < 6e4
-		|| table->time_to_eat < 6e4
-		|| table->time_to_sleep < 6e4)
-	{
-		print_error("timestamps <= 60ms");
-		return (1);
-	}
-	if (table->nb_philos < 1 || table->nb_philos > 200)
-	{
-		print_error("wrong number of philo");
-		return (1);
-	}
-	if (av[5])
-	{
-		table->meals_required = ft_atol(av[5]);
-		if (table->meals_required < 1)
-			return (print_error("meals_required must be positive"), 1);
-	}
-	else
-		table->meals_required = -1;
-	return (0);
-}*/
 
 static int	assign_time(t_msec *dest, const char *str)
 {
 	long	tmp;
 
 	tmp = ft_atol(str);
-	if (tmp == -1 || tmp > LONG_MAX / 1000)
+	if (tmp == -1 || tmp > LONG_MAX)
 		return (1);
 	if (tmp < 60)
 		return (print_error("timestamps <= 60ms"), 1);
